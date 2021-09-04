@@ -4,15 +4,6 @@ import numpy as np
 
 from entities import CleanBankRow
 
-"""
-    account_name: str
-    date: str
-    payment_to: str
-    amount: str
-    description: str
-    category: Category
-"""
-
 
 def execute(bank_rows: List[CleanBankRow]):
     columns = _get_columns(bank_rows)
