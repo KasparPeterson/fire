@@ -7,16 +7,19 @@ from entities import CleanBankRow
 
 def execute(bank_rows: List[CleanBankRow]):
     report = {}
+    total = Decimal(0)
     for row in bank_rows:
         if row.category in report:
             report[row.category] = report[row.category] + Decimal(row.amount)
         else:
             report[row.category] = Decimal(row.amount)
+        total += Decimal(row.amount)
 
     print("\n# Report for", bank_rows[0].date)
     sorted_report = dict(sorted(report.items(), key=lambda item: item[1]))
     for key, value in sorted_report.items():
         print(f"    {key}: {value}")
+    print(f"    total: {total}")
 
     _plot(report)
 

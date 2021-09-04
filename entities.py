@@ -19,6 +19,8 @@ class Category(enum.Enum):
     TECHNOLOGY = "technology"
     EDUCATION = "education"
     INVESTMENT = "investment"
+    INCOME = "income"
+    UTILITIES = "utilities"
 
 
 @dataclass(frozen=True)
