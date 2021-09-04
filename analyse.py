@@ -13,7 +13,7 @@ def execute(bank_rows: List[CleanBankRow]):
         else:
             report[row.category] = Decimal(row.amount)
 
-    print("\n# Report\n")
+    print("\n# Report for", bank_rows[0].date)
     sorted_report = dict(sorted(report.items(), key=lambda item: item[1]))
     for key, value in sorted_report.items():
         print(f"    {key}: {value}")
