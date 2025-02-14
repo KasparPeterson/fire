@@ -1,11 +1,12 @@
 import enum
 from dataclasses import dataclass
+from typing import List
 
 
 class Category(enum.Enum):
     GROCERIES = "groceries"
     BANK_FEES = "bank_fees"
-    SUPPORT_OTHERS = "support_others"
+    SUPPORT_OTHERS = "support_others"  # TODO: Is it gifts/donations?
     HEALTH = "health"
     ALCOHOL = "alcohol"
     TAXI = "taxi"
@@ -20,7 +21,14 @@ class Category(enum.Enum):
     EDUCATION = "education"
     INVESTMENT = "investment"
     INCOME = "income"
+    RENT = "rent"
     UTILITIES = "utilities"
+    KIDS = "kids"
+    CAR = "car"
+    HOME = "home"
+    SHOPPING = "shopping"
+    BEAUTY = "beauty"
+    UNCATEGORIZED = "uncategorized"
 
 
 @dataclass(frozen=True)
@@ -40,3 +48,16 @@ class CleanBankRow:
     amount: str
     description: str
     category: Category
+
+    def get_float_amount(self) -> float:
+        try:
+            return float(self.amount)
+        except:
+            print("Failed to convert amount:", self.amount)
+        return 0.0
+
+
+@dataclass(frozen=True)
+class MonthlyCleanBankRows:
+    month: str
+    rows: List[CleanBankRow]

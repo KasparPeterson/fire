@@ -2,12 +2,12 @@ from typing import List
 
 import numpy as np
 
-from entities import CleanBankRow
+from fire.entities import CleanBankRow
 
 
 def execute(bank_rows: List[CleanBankRow]):
     columns = _get_columns(bank_rows)
-    np.savetxt('data/data.csv', columns, delimiter=',', fmt='%s')
+    np.savetxt('../data/data.csv', columns, delimiter=',', fmt='%s')
 
 
 def _get_columns(bank_rows: List[CleanBankRow]):
