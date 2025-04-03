@@ -8,11 +8,17 @@ interface SpendingData {
   [key: string]: string;
 }
 
-interface SpendingChartProps {
-  data: SpendingData;
+interface MonthlyReport {
+  month: string;
+  spendings: SpendingData;
 }
 
-const SpendingChart = ({ data }: SpendingChartProps) => {
+interface SpendingChartProps {
+  data: SpendingData;
+  month?: string;
+}
+
+const SpendingChart = ({ data, month }: SpendingChartProps) => {
   // Filter out income and zero values, and sort by absolute value
   const filteredData = Object.entries(data)
     .filter(([_, value]) => parseFloat(value) < 0)
@@ -54,7 +60,7 @@ const SpendingChart = ({ data }: SpendingChartProps) => {
       },
       title: {
         display: true,
-        text: 'Monthly Spending by Category',
+        text: month ? `Spending Analysis - ${new Date(month).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}` : 'Monthly Spending Analysis',
         font: {
           size: 16,
         },
@@ -66,7 +72,7 @@ const SpendingChart = ({ data }: SpendingChartProps) => {
     <Paper elevation={3} sx={{ p: 3, maxWidth: 800, mx: 'auto', mt: 4 }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Typography variant="h4" gutterBottom>
-          Monthly Spending Analysis
+          {month ? new Date(month).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : 'Monthly Spending Analysis'}
         </Typography>
         <Box sx={{ width: '100%', height: 400 }}>
           <Pie data={chartData} options={options} />
