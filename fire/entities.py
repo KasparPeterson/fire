@@ -1,6 +1,6 @@
 import enum
 from dataclasses import dataclass
-from typing import List
+from typing import List, Dict
 
 
 class Category(enum.Enum):
@@ -61,3 +61,14 @@ class CleanBankRow:
 class MonthlyCleanBankRows:
     month: str
     rows: List[CleanBankRow]
+
+
+@dataclass(frozen=True)
+class MonthlyReport:
+    month: str
+    spendings: Dict[Category, str]
+
+
+@dataclass(frozen=True)
+class Report:
+    reports: List[MonthlyReport]

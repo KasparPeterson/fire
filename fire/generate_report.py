@@ -2,10 +2,23 @@ from typing import Dict
 from typing import List
 from decimal import Decimal
 
+from fire import utils
 from fire.entities import CleanBankRow
+from fire.entities import MonthlyCleanBankRows
+from fire.entities import MonthlyReport
+from fire.entities import Report
 
 
-def execute(bank_rows: List[CleanBankRow]) -> Dict:
+def execute(rows_by_month: List[MonthlyCleanBankRows]) -> Report:
+    report = Report(reports=[])
+    for monthly_rows in rows_by_month:
+        utils.print_stats(monthly_rows)
+        monthly_report = _generate_monthly(monthly_rows.rows)
+        report.reports.append(monthly_report)
+    return report
+
+
+def _generate_monthly(bank_rows: List[CleanBankRow]) -> MonthlyReport:
     """
 
     :param bank_rows:
@@ -31,7 +44,11 @@ def execute(bank_rows: List[CleanBankRow]) -> Dict:
         print(f"    {key}: {value}")
         sorted_report[key] = str(value)
     print(f"    total: {total}")
-    return sorted_report
+
+    return MonthlyReport(
+        month=bank_rows[0].date,
+        spendings=sorted_report
+    )
 
 
 def _get_income_outcome(bank_rows: List[CleanBankRow]) -> (float, float):

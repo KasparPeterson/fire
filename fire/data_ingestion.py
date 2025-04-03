@@ -3,6 +3,7 @@ import csv
 from typing import List
 from typing import Optional
 
+from fire import classifier
 from fire import maps
 from fire.entities import Category
 from fire.entities import CleanBankRow
@@ -64,15 +65,10 @@ def _get_category(row: RawBankRow) -> Category:
     if category := _get_description_starts_with_match(row):
         return category
 
-    if _is_bank_fees(row):
+    if classifier.is_bank_fees(row):
         return Category.BANK_FEES
 
     return Category.UNCATEGORIZED
-
-
-def _is_bank_fees(row: RawBankRow) -> bool:
-    if row.description.startswith('Ülekande teenustasu.'):
-        return True
 
 
 def _get_payment_to_match(row: RawBankRow) -> Optional[Category]:

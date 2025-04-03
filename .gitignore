@@ -1,3 +1,7 @@
 data
 .idea
 **/__pycache__/**
+
+# Private data files
+fire/maps.py
+report.json
