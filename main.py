@@ -10,6 +10,11 @@ from fire import data_ingestion
 from fire.entities import MonthlyCleanBankRows
 from fire.entities import Report
 
+"""
+TODO:
+* handle duplicates in data_ingestion
+"""
+
 
 def main():
     rows: List[CleanBankRow] = data_ingestion.execute()
@@ -19,8 +24,6 @@ def main():
     print(report)
     _dump_to_json(report)
     _dump_to_frontend(report)
-    # save_bank_rows.execute(clean_bank_rows)
-    # analyse.execute(monthly_rows.rows)
 
 
 def custom_serializer(obj):

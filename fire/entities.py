@@ -6,7 +6,7 @@ from typing import List, Dict
 class Category(enum.Enum):
     GROCERIES = "groceries"
     BANK_FEES = "bank_fees"
-    SUPPORT_OTHERS = "support_others"  # TODO: Is it gifts/donations?
+    CHARITY = "charity"
     HEALTH = "health"
     ALCOHOL = "alcohol"
     TAXI = "taxi"
