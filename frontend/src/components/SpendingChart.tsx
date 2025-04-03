@@ -104,7 +104,7 @@ const SpendingChart = ({ data, month }: SpendingChartProps) => {
           {month ? new Date(month).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : 'Monthly Spending Analysis'}
         </Typography>
         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 2, width: '100%' }}>
-          <Box sx={{ flex: { xs: '1', md: '2' }, height: 400 }}>
+          <Box sx={{ flex: { xs: '1', md: '2' }, height: 600 }}>
             <Pie data={chartData} options={options} />
           </Box>
           <Box sx={{ flex: { xs: '1', md: '1' }, display: 'flex', flexDirection: 'column', gap: 2 }}>
