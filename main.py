@@ -18,6 +18,7 @@ def main():
     print("\n\n\nFINAL REPORT:")
     print(report)
     _dump_to_json(report)
+    _dump_to_frontend(report)
     # save_bank_rows.execute(clean_bank_rows)
     # analyse.execute(monthly_rows.rows)
 
@@ -30,10 +31,19 @@ def custom_serializer(obj):
     raise TypeError(f"Type {type(obj)} not serializable")
 
 
+def _report_to_json(report: Report):
+    return json.dumps(report, default=custom_serializer, indent=2)
+
+
 def _dump_to_json(report: Report):
-    json_data = json.dumps(report, default=custom_serializer, indent=2)
     with open("report.json", "w") as file:
-        file.write(json_data)
+        file.write(_report_to_json(report))
+
+
+def _dump_to_frontend(report: Report):
+    tsx_content = f"export const reportData = {_report_to_json(report)};"
+    with open("frontend/src/data/reports.ts", "w") as file:
+        file.write(tsx_content)
 
 
 if __name__ == '__main__':
