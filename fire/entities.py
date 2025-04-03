@@ -66,6 +66,8 @@ class MonthlyCleanBankRows:
 @dataclass(frozen=True)
 class MonthlyReport:
     month: str
+    income: str
+    outcome: str
     spendings: Dict[Category, str]
 
 

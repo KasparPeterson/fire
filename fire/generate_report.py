@@ -47,11 +47,13 @@ def _generate_monthly(bank_rows: List[CleanBankRow]) -> MonthlyReport:
 
     return MonthlyReport(
         month=bank_rows[0].date,
+        income=income,
+        outcome=outcome,
         spendings=sorted_report
     )
 
 
-def _get_income_outcome(bank_rows: List[CleanBankRow]) -> (float, float):
+def _get_income_outcome(bank_rows: List[CleanBankRow]) -> (str, str):
     income = 0
     outcome = 0
     for row in bank_rows:
@@ -61,4 +63,4 @@ def _get_income_outcome(bank_rows: List[CleanBankRow]) -> (float, float):
         else:
             income += amount
 
-    return income, outcome
+    return f"{income:.2f}", f"{outcome:.2f}"
