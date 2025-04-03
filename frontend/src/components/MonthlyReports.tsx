@@ -18,7 +18,7 @@ const MonthlyReports = ({ reports }: MonthlyReportsProps) => {
   return (
     <Box sx={{ 
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))',
+      gridTemplateColumns: '1fr',
       gap: 3,
       p: 3
     }}>

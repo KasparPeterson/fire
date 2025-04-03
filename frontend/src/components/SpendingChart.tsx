@@ -30,8 +30,7 @@ const SpendingChart = ({ data, month }: SpendingChartProps) => {
 
   // Filter out income and zero values, and sort by absolute value
   const filteredData = Object.entries(data)
-    .filter(([_, value]) => parseFloat(value) < 0)
-    .sort((a, b) => Math.abs(parseFloat(a[1])) - Math.abs(parseFloat(b[1])));
+    .filter(([_, value]) => parseFloat(value) < 0);
 
   const chartData = {
     labels: filteredData.map(([key]) => key.replace('Category.', '')),
@@ -66,6 +65,27 @@ const SpendingChart = ({ data, month }: SpendingChartProps) => {
     plugins: {
       legend: {
         position: 'right' as const,
+        labels: {
+          generateLabels: (chart: any) => {
+            const datasets = chart.data.datasets;
+            return chart.data.labels.map((label: string, i: number) => {
+              const value = datasets[0].data[i];
+              return {
+                text: `${label}: €${value.toFixed(2)}`,
+                fillStyle: datasets[0].backgroundColor[i],
+                hidden: false,
+                lineCap: 'butt',
+                lineDash: [],
+                lineDashOffset: 0,
+                lineJoin: 'miter',
+                lineWidth: 1,
+                strokeStyle: '#fff',
+                pointStyle: 'circle',
+                rotation: 0
+              };
+            });
+          }
+        }
       },
       title: {
         display: true,
