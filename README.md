@@ -18,3 +18,12 @@ python main.py
 ### Frontend
 
 See [frontend/README.md](frontend/README.md)
+
+
+### TODO:
+
+* ignore duplicates in data ingestion
+* add tests and get to TDD
+* add Rest API
+* add monthly trends per category
+* each category needs to be the same color on every graph
