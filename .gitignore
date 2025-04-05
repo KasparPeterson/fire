@@ -3,5 +3,5 @@ data
 **/__pycache__/**
 
 # Private data files
-fire/maps.py
+fire/maps_private.py
 report.json
