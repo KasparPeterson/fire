@@ -1,5 +1,7 @@
 # Fire
 
+[![unit tests](https://github.com/KasparPeterson/fire/actions/workflows/unit_tests.yml/badge.svg)](https://github.com/KasparPeterson/fire/actions/workflows/unit_tests.yml)
+
 ### Setup
 
 ```shell
