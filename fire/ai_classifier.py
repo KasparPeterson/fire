@@ -21,11 +21,6 @@ Allowed categories are:
 Return data as JSON please!
 """
 
-client = OpenAI(
-    # This is the default and can be omitted
-    api_key=os.environ.get("OPENAI_API_KEY"),
-)
-
 
 def execute(rows: List[CleanBankRow]) -> List[CleanBankRow]:
     result = []
@@ -40,6 +35,10 @@ def _handle_batch(rows: List[CleanBankRow]) -> List[CleanBankRow]:
 
     prompt = _generate_prompt(rows)
     # print("\nDEBUG, openai prompt:", prompt)
+    client = OpenAI(
+        # This is the default and can be omitted
+        api_key=os.environ.get("OPENAI_API_KEY"),
+    )
     response = client.responses.create(
         model="gpt-4o",
         instructions="You are financial advisor who is excellent in understanding each "

@@ -3,8 +3,7 @@
 ### Setup
 
 ```shell
-conda update -f environment.yml
-conda activate fire
+pip install -r requirements.txt
 ```
 
 ### Usage
