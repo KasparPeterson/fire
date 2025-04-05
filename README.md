@@ -22,8 +22,10 @@ See [frontend/README.md](frontend/README.md)
 
 ### TODO:
 
+* use AI to categorise unknowns
 * ignore duplicates in data ingestion
 * add tests and get to TDD
 * add Rest API
 * add monthly trends per category
 * each category needs to be the same color on every graph
+* click on a category to see all transactions in that category

@@ -40,8 +40,9 @@ class RawBankRow:
     description: str
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=False)
 class CleanBankRow:
+    id: str
     account_name: str
     date: str
     payment_to: str
@@ -55,6 +56,26 @@ class CleanBankRow:
         except:
             print("Failed to convert amount:", self.amount)
         return 0.0
+
+    @staticmethod
+    def from_dict(data: Dict) -> 'CleanBankRow':
+        return CleanBankRow(
+            id=data["id"],
+            account_name=data["account_name"],
+            date=data["date"],
+            payment_to=data["payment_to"],
+            amount=data["amount"],
+            description=data["description"],
+            category=CleanBankRow._get_category(data["category"]),
+        )
+
+    @staticmethod
+    def _get_category(category: str) -> Category:
+        try:
+            return Category(category)
+        except ValueError:
+            print(f"EXCEPTION, ValueError, invalid category with value: {category}")
+            return Category.UNCATEGORIZED
 
 
 @dataclass(frozen=True)

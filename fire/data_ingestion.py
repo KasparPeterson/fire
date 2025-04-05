@@ -2,6 +2,7 @@ import os
 import csv
 from typing import List
 
+from fire import calculate_id
 from fire import classifier
 from fire.entities import CleanBankRow
 from fire.entities import RawBankRow
@@ -67,6 +68,7 @@ def _clean(raw_bank_rows: List[RawBankRow]) -> List[CleanBankRow]:
     result: List[CleanBankRow] = []
     for row in raw_bank_rows:
         result.append(CleanBankRow(
+            id=calculate_id.execute(row),
             account_name=row.account_name,
             date=row.date,
             payment_to=row.payment_to,
