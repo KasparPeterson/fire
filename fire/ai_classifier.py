@@ -25,7 +25,7 @@ Return data as JSON please!
 def execute(rows: List[CleanBankRow]) -> List[CleanBankRow]:
     result = []
     for i in range(int(len(rows) / BATCH_SIZE)):
-        batch = rows[i * BATCH_SIZE: (i + 1) * BATCH_SIZE]
+        batch = rows[i * BATCH_SIZE : (i + 1) * BATCH_SIZE]
         result += _handle_batch(batch)
     return result
 
@@ -42,7 +42,7 @@ def _handle_batch(rows: List[CleanBankRow]) -> List[CleanBankRow]:
     response = client.responses.create(
         model="gpt-4o",
         instructions="You are financial advisor who is excellent in understanding each "
-                     "line in a bank statement and to what category it belongs to",
+        "line in a bank statement and to what category it belongs to",
         input=prompt,
     )
     # print("\nDEBUG, openai response:\n", response.output_text, "\n")
@@ -72,7 +72,7 @@ def _json_to_clean_bank_rows(json_data: Dict) -> List[CleanBankRow]:
     return result
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     ROWS = [
         CleanBankRow(
             id="id1",

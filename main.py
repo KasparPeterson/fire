@@ -51,5 +51,5 @@ def _dump_to_frontend(report: Report):
         file.write(tsx_content)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

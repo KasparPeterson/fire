@@ -22,7 +22,7 @@ def get_category(row: RawBankRow) -> Category:
 
 
 def _is_bank_fees(row: RawBankRow) -> bool:
-    if row.description.startswith('Ülekande teenustasu.'):
+    if row.description.startswith("Ülekande teenustasu."):
         return True
     return False
 

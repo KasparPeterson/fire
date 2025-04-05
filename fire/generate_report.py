@@ -45,10 +45,7 @@ def _generate_monthly(bank_rows: List[CleanBankRow]) -> MonthlyReport:
     print(f"    total: {total}")
 
     return MonthlyReport(
-        month=bank_rows[0].date,
-        income=income,
-        outcome=outcome,
-        spendings=sorted_report
+        month=bank_rows[0].date, income=income, outcome=outcome, spendings=sorted_report
     )
 
 

@@ -26,7 +26,9 @@ ROWS = [
 
 def test_generate_prompt():
     result = ai_classifier._generate_prompt(ROWS)
-    assert result == """
+    assert (
+        result
+        == """
 Given these bank statement lines:
 [
   {
@@ -55,10 +57,12 @@ Allowed categories are:
 
 Return data as JSON please!
 """
+    )
 
 
 def test_markdown_to_json_dict():
-    result = ai_classifier._markdown_to_json_dict("""
+    result = ai_classifier._markdown_to_json_dict(
+        """
  ```json
 [
   {
@@ -72,7 +76,8 @@ def test_markdown_to_json_dict():
   }
 ]
 ```
-    """)
+    """
+    )
     assert result == [
         {
             "id": "id1",
@@ -81,29 +86,33 @@ def test_markdown_to_json_dict():
             "payment_to": "Truebarbers oÜ",
             "amount": "-56.00",
             "description": "Juuksur",
-            "category": "beauty"
+            "category": "beauty",
         }
     ]
 
 
 def test_json_to_clean_bank_rows():
-    result = ai_classifier._json_to_clean_bank_rows([
-        {
-            "id": "id1",
-            "account_name": "EE757700771003840208",
-            "date": "2024-09-27",
-            "payment_to": "Truebarbers oÜ",
-            "amount": "-56.00",
-            "description": "Juuksur",
-            "category": "beauty"
-        }
-    ])
-    assert result == [CleanBankRow(
-        id="id1",
-        account_name="EE757700771003840208",
-        date="2024-09-27",
-        payment_to="Truebarbers oÜ",
-        amount="-56.00",
-        description="Juuksur",
-        category=Category.BEAUTY,
-    )]
+    result = ai_classifier._json_to_clean_bank_rows(
+        [
+            {
+                "id": "id1",
+                "account_name": "EE757700771003840208",
+                "date": "2024-09-27",
+                "payment_to": "Truebarbers oÜ",
+                "amount": "-56.00",
+                "description": "Juuksur",
+                "category": "beauty",
+            }
+        ]
+    )
+    assert result == [
+        CleanBankRow(
+            id="id1",
+            account_name="EE757700771003840208",
+            date="2024-09-27",
+            payment_to="Truebarbers oÜ",
+            amount="-56.00",
+            description="Juuksur",
+            category=Category.BEAUTY,
+        )
+    ]

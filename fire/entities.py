@@ -58,7 +58,7 @@ class CleanBankRow:
         return 0.0
 
     @staticmethod
-    def from_dict(data: Dict) -> 'CleanBankRow':
+    def from_dict(data: Dict) -> "CleanBankRow":
         return CleanBankRow(
             id=data["id"],
             account_name=data["account_name"],

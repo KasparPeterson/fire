@@ -6,7 +6,7 @@ ROW = RawBankRow(
     date="date123",
     payment_to="def456",
     amount="123.45",
-    description="ghi789"
+    description="ghi789",
 )
 
 

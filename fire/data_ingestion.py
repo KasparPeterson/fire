@@ -14,7 +14,7 @@ FIELD_ALIASES = {
     "date": {"Kuupäev", "Date"},
     "payment_to": {"Saaja/maksja nimi", "Name", "Recipient name"},
     "amount": {"Summa", "Amount", "Transaction amount"},
-    "description": {"Selgitus", "Description", "Details"}
+    "description": {"Selgitus", "Description", "Details"},
 }
 
 
@@ -44,38 +44,41 @@ def normalize_headers(headers):
 
 
 def _read_bank_rows(file_path: str) -> List[RawBankRow]:
-    reader = csv.DictReader(open(file_path, encoding='utf-8-sig'))
+    reader = csv.DictReader(open(file_path, encoding="utf-8-sig"))
     normalized = normalize_headers(reader.fieldnames)
 
     bank_rows = []
     for row in reader:
         parsed_row = {
-            key: row.get(header, "").strip()
-            for key, header in normalized.items()
+            key: row.get(header, "").strip() for key, header in normalized.items()
         }
 
-        bank_rows.append(RawBankRow(
-            account_name=parsed_row["account_name"],
-            date=parsed_row['date'],
-            payment_to=parsed_row['payment_to'],
-            amount=parsed_row['amount'],
-            description=parsed_row['description']
-        ))
+        bank_rows.append(
+            RawBankRow(
+                account_name=parsed_row["account_name"],
+                date=parsed_row["date"],
+                payment_to=parsed_row["payment_to"],
+                amount=parsed_row["amount"],
+                description=parsed_row["description"],
+            )
+        )
     return bank_rows
 
 
 def _clean(raw_bank_rows: List[RawBankRow]) -> List[CleanBankRow]:
     result: List[CleanBankRow] = []
     for row in raw_bank_rows:
-        result.append(CleanBankRow(
-            id=calculate_id.execute(row),
-            account_name=row.account_name,
-            date=row.date,
-            payment_to=row.payment_to,
-            amount=row.amount,
-            description=row.description,
-            category=classifier.get_category(row)
-        ))
+        result.append(
+            CleanBankRow(
+                id=calculate_id.execute(row),
+                account_name=row.account_name,
+                date=row.date,
+                payment_to=row.payment_to,
+                amount=row.amount,
+                description=row.description,
+                category=classifier.get_category(row),
+            )
+        )
     return result
 
 

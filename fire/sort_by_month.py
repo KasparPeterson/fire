@@ -19,10 +19,7 @@ def execute(rows: List[CleanBankRow]) -> List[MonthlyCleanBankRows]:
 
     result = []
     for month, rows in months.items():
-        result.append(MonthlyCleanBankRows(
-            month=month,
-            rows=rows
-        ))
+        result.append(MonthlyCleanBankRows(month=month, rows=rows))
     return result
 
 
