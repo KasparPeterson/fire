@@ -1,6 +1,7 @@
 from typing import List
 
 from fire import ai_classifier
+from fire import filter_out_credits
 from fire import generate_report
 from fire import sort_by_month
 from fire import utils
@@ -13,6 +14,9 @@ from fire.entities import Report
 
 def main():
     rows: List[CleanBankRow] = data_ingestion.execute()
+    print("DEBUG, before filter out credits:", len(rows))
+    rows: List[CleanBankRow] = filter_out_credits.execute(rows)
+    print("DEBUG, after filter out credits:", len(rows))
     rows: List[CleanBankRow] = _ai_classify_uncategorised(rows)
     rows_by_month: List[MonthlyCleanBankRows] = sort_by_month.execute(rows)
 

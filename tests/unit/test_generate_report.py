@@ -1,37 +1,10 @@
 from fire import generate_report
 from fire.entities import Category
-from fire.entities import CleanBankRow
 from fire.entities import MonthlyCleanBankRows
 from fire.entities import MonthlyReport
 from fire.entities import Report
-
-TRAVEL_ROW = CleanBankRow(
-    id="id1",
-    account_name="name1",
-    date="2025-03-01",
-    payment_to="abc1",
-    amount="-123.45",
-    description="desc1",
-    category=Category.TRAVEL,
-)
-INCOME_ROW = CleanBankRow(
-    id="id2",
-    account_name="name2",
-    date="2025-03-01",
-    payment_to="abc2",
-    amount="456.78",
-    description="desc2",
-    category=Category.INCOME,
-)
-SELF_ROW = CleanBankRow(
-    id="id2",
-    account_name="name3",
-    date="2025-03-01",
-    payment_to="abc3",
-    amount="789.01",
-    description="desc3",
-    category=Category.SELF,
-)
+from tests.unit.example_rows import INCOME_ROW
+from tests.unit.example_rows import TRAVEL_ROW
 
 
 def test_execute_one_month_one_spending():

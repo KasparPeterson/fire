@@ -23,7 +23,7 @@ See [frontend/README.md](frontend/README.md)
 
 ### TODO:
 
-- [ ] filter out credit payments before
+- [x] filter out credit payments before
 - [x] use AI to categorise unknowns
 - [ ] ignore duplicates in data ingestion
 - [x] add tests and get to TDD
