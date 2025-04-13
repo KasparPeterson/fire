@@ -35,7 +35,8 @@ def _ai_classify_uncategorised(rows: List[CleanBankRow]) -> List[CleanBankRow]:
             uncategorized.append(row)
         else:
             categorized.append(row)
-
+    print("DEBUG, categorized rows:", len(categorized))
+    print("DEBUG, uncategorized rows:", len(uncategorized))
     new_rows = ai_classifier.execute(uncategorized)
     return categorized + new_rows
 

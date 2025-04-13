@@ -90,6 +90,7 @@ class MonthlyReport:
     income: str
     outcome: str
     spendings: Dict[Category, str]
+    detailed_spendings: Dict[Category, List[CleanBankRow]]
 
 
 @dataclass(frozen=True)

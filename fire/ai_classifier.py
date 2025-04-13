@@ -23,8 +23,9 @@ Return data as JSON please!
 
 
 def execute(rows: List[CleanBankRow]) -> List[CleanBankRow]:
+    print("DEBUG, ai_classifier, execute, rows:", len(rows))
     result = []
-    for i in range(int(len(rows) / BATCH_SIZE)):
+    for i in range(int(len(rows) / BATCH_SIZE) + 1):
         batch = rows[i * BATCH_SIZE : (i + 1) * BATCH_SIZE]
         result += _handle_batch(batch)
     return result

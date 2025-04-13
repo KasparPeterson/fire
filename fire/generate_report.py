@@ -1,3 +1,4 @@
+from typing import Dict
 from typing import List
 from decimal import Decimal
 
@@ -28,25 +29,38 @@ def _generate_monthly(bank_rows: List[CleanBankRow]) -> MonthlyReport:
     print("Outcome:", outcome)
 
     report = {}
+    detailed_spendings = {}
     total = Decimal(0)
     for row in bank_rows:
         category = str(row.category)
         if category in report:
             report[category] = report[category] + Decimal(row.amount)
+            detailed_spendings[category].append(row)
         else:
             report[category] = Decimal(row.amount)
+            detailed_spendings[category] = [row]
         total += Decimal(row.amount)
 
     print("\n# Report for", bank_rows[0].date)
-    sorted_report = dict(sorted(report.items(), key=lambda item: item[1]))
-    for key, value in sorted_report.items():
-        print(f"    {key}: {value}")
-        sorted_report[key] = str(value)
+    sorted_report = _sort(report)
     print(f"    total: {total}")
 
     return MonthlyReport(
-        month=bank_rows[0].date, income=income, outcome=outcome, spendings=sorted_report
+        month=bank_rows[0].date,
+        income=income,
+        outcome=outcome,
+        spendings=sorted_report,
+        detailed_spendings=detailed_spendings,
     )
+
+
+def _sort(report: Dict):
+    result = dict(sorted(report.items(), key=lambda item: item[1]))
+    for key, value in result.items():
+        print(f"    {key}: {value}")
+        result[key] = str(value)
+
+    return result
 
 
 def _get_income_outcome(bank_rows: List[CleanBankRow]) -> (str, str):
