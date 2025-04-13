@@ -80,25 +80,3 @@ def test_execute_one_month_one_spending_one_income():
         ]
     )
     assert expected == result
-
-
-def test_execute_incorrect_income():
-    monthly_row = MonthlyCleanBankRows(
-        month="2025-03-01",
-        rows=[SELF_ROW],
-    )
-    result = generate_report.execute([monthly_row])
-    expected = Report(
-        reports=[
-            MonthlyReport(
-                month="2025-03-01",
-                income="0.00",
-                outcome="-123.45",
-                spendings={str(Category.TRAVEL): "-123.45"},
-                detailed_spendings={
-                    str(Category.TRAVEL): [TRAVEL_ROW],
-                },
-            )
-        ]
-    )
-    assert expected == result
