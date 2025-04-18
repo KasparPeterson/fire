@@ -2,6 +2,11 @@
 
 [![unit tests](https://github.com/KasparPeterson/fire/actions/workflows/unit_tests.yml/badge.svg)](https://github.com/KasparPeterson/fire/actions/workflows/unit_tests.yml)
 
+Simple personal app to analyse my spendings based on my bank statements. Combines multiple .csv outputs from multiple different Estonian banks. Supports adding manual rules for categorisation. What is not being categorised by python will be categorised by an LLM.
+
+Python backend for categorisation and providing a structured json.
+Frontend for visualisation and charts.
+
 ### Setup
 
 ```shell
